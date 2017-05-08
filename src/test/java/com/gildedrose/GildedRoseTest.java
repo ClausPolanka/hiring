@@ -12,6 +12,7 @@ public class GildedRoseTest {
     private static final int ITEM_DEFAULT_QUALITY = 15;
     private static final int ITEM_OVERDUE_SELLIN = 0;
     private static final int ITEM_LONG_OVERDUE_SELLIN = -50;
+    public static final int ITEM_QUALITY_MAX = 50;
     private Item item;
     private GildedRose app;
 
@@ -82,5 +83,13 @@ public class GildedRoseTest {
         item.sellIn = ITEM_LONG_OVERDUE_SELLIN;
         app.updateQuality();
         assertEquals(ITEM_DEFAULT_QUALITY + 2, app.items[0].quality);
+    }
+
+    @Test
+    public void withAgedBrie_doesNotIncreaseQualityOverMaximum() {
+        item.name = "Aged Brie";
+        item.quality = ITEM_QUALITY_MAX;
+        app.updateQuality();
+        assertEquals(ITEM_QUALITY_MAX, app.items[0].quality);
     }
 }
