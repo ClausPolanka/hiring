@@ -9,15 +9,15 @@ public class GildedRoseTest {
 
     private static final String ITEM_DEFAULT_NAME = "foo";
     private static final int ITEM_DEFAULT_SELLIN = 10;
-    private static final int ITEM_DEFAULT_QUALITY = 10;
+    private static final int ITEM_DEFAULT_QUALITY = 15;
     private static final int ITEM_OVERDUE_SELLIN = 0;
     private static final int ITEM_LONG_OVERDUE_SELLIN = -50;
     private Item item;
     private GildedRose app;
 
     @Before
-    public void setUp() throws Exception {
-        item = new Item(ITEM_DEFAULT_NAME, ITEM_DEFAULT_SELLIN, 10);
+    public void setUp() {
+        item = new Item(ITEM_DEFAULT_NAME, ITEM_DEFAULT_SELLIN, ITEM_DEFAULT_QUALITY);
         final Item[] items = new Item[] {item};
         app = new GildedRose(items);
     }
