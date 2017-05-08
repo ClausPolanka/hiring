@@ -29,47 +29,47 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void doesDecreaseSellIn() throws Exception {
+    public void doesDecreaseSellIn() {
         app.updateQuality();
         assertEquals(ITEM_DEFAULT_SELLIN - 1, app.items[0].sellIn);
     }
 
     @Test
-    public void doesDecreaseQuality() throws Exception {
+    public void doesDecreaseQuality() {
         app.updateQuality();
         assertEquals(ITEM_DEFAULT_QUALITY - 1, app.items[0].quality);
     }
 
     @Test
-    public void withPassedSellIn_doesDecreaseQuality() throws Exception {
+    public void withPassedSellIn_doesDecreaseQuality() {
         item.sellIn = ITEM_OVERDUE_SELLIN;
         app.updateQuality();
         assertEquals(ITEM_DEFAULT_QUALITY - 2, app.items[0].quality);
     }
 
     @Test
-    public void doesNotDecreaseQualityBelowZero() throws Exception {
+    public void doesNotDecreaseQualityBelowZero() {
         item.quality = 0;
         app.updateQuality();
         assertEquals(0, app.items[0].quality);
     }
 
     @Test
-    public void withNegativeQuality_doesNotDecreaseQuality() throws Exception {
+    public void withNegativeQuality_doesNotDecreaseQuality() {
         item.quality = -1;
         app.updateQuality();
         assertEquals(-1, app.items[0].quality);
     }
 
     @Test
-    public void withAgedBrie_doesIncreaseQuality() throws Exception {
+    public void withAgedBrie_doesIncreaseQuality() {
         item.name = "Aged Brie";
         app.updateQuality();
         assertEquals(ITEM_DEFAULT_QUALITY + 1, app.items[0].quality);
     }
 
     @Test
-    public void withAgedBrieAfterSellIn_doesIncreaseQualityTwice() throws Exception {
+    public void withAgedBrieAfterSellIn_doesIncreaseQualityTwice() {
         item.name = "Aged Brie";
         item.sellIn = ITEM_OVERDUE_SELLIN;
         app.updateQuality();
@@ -77,7 +77,7 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void withLongOverdueAgedBrie_doesIncreaseQualityTwice() throws Exception {
+    public void withLongOverdueAgedBrie_doesIncreaseQualityTwice() {
         item.name = "Aged Brie";
         item.sellIn = ITEM_LONG_OVERDUE_SELLIN;
         app.updateQuality();
