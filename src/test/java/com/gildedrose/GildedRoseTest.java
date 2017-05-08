@@ -76,4 +76,13 @@ public class GildedRoseTest {
         app.updateQuality();
         assertEquals(12, app.items[0].quality);
     }
+
+    @Test
+    public void updateQualityForAgedBrieLongAfterSellIn_doesIncreaseQualityTwice() throws Exception {
+        item.name = "Aged Brie";
+        item.sellIn = -50;
+        item.quality = 10;
+        app.updateQuality();
+        assertEquals(12, app.items[0].quality);
+    }
 }
