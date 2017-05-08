@@ -7,11 +7,11 @@ import org.junit.Test;
 
 public class GildedRoseTest {
 
-    public static final String ITEM_DEFAULT_NAME = "foo";
-    public static final int ITEM_DEFAULT_SELLIN = 10;
-    public static final int ITEM_DEFAULT_QUALITY = 10;
-    public static final int ITEM_OVERDUE_SELLIN = 0;
-    public static final int ITEM_LONG_OVERDUE_SELLIN = -50;
+    private static final String ITEM_DEFAULT_NAME = "foo";
+    private static final int ITEM_DEFAULT_SELLIN = 10;
+    private static final int ITEM_DEFAULT_QUALITY = 10;
+    private static final int ITEM_OVERDUE_SELLIN = 0;
+    private static final int ITEM_LONG_OVERDUE_SELLIN = -50;
     private Item item;
     private GildedRose app;
 
