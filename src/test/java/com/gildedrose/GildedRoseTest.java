@@ -2,14 +2,24 @@ package com.gildedrose;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class GildedRoseTest {
 
+    private Item item;
+    private GildedRose app;
+
+    @Before
+    public void setUp() throws Exception {
+        item = new Item("foo", 0, 0);
+        final Item[] items = new Item[] {item};
+        app = new GildedRose(items);
+    }
+
     @Test
     public void updateQuality_doesNotAlterName() {
-        Item[] items = new Item[] { new Item("foo", 0, 0) };
-        GildedRose app = new GildedRose(items);
+        item.name = "foo";
         app.updateQuality();
         assertEquals("foo", app.items[0].name);
     }
