@@ -46,7 +46,7 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void withPassedSellIn_doesDecreaseQuality() {
+    public void withPassedSellIn_doesDecreaseQualityByTwo() {
         item.sellIn = ITEM_OVERDUE_SELLIN;
         app.updateQuality();
         assertEquals(ITEM_DEFAULT_QUALITY - 2, app.items[0].quality);
