@@ -7,43 +7,44 @@ import org.junit.Test;
 
 public class GildedRoseTest {
 
+    public static final String ITEM_DEFAULT_NAME = "foo";
+    public static final int ITEM_DEFAULT_SELLIN = 10;
+    public static final int ITEM_DEFAULT_QUALITY = 10;
+    public static final int ITEM_OVERDUE_SELLIN = 0;
+    public static final int ITEM_LONG_OVERDUE_SELLIN = -50;
     private Item item;
     private GildedRose app;
 
     @Before
     public void setUp() throws Exception {
-        item = new Item("foo", 10, 10);
+        item = new Item(ITEM_DEFAULT_NAME, ITEM_DEFAULT_SELLIN, 10);
         final Item[] items = new Item[] {item};
         app = new GildedRose(items);
     }
 
     @Test
     public void updateQuality_doesNotAlterName() {
-        item.name = "foo";
         app.updateQuality();
-        assertEquals("foo", app.items[0].name);
+        assertEquals(ITEM_DEFAULT_NAME, app.items[0].name);
     }
 
     @Test
     public void updateQuality_doesDecreaseSellIn() throws Exception {
-        item.sellIn = 10;
         app.updateQuality();
-        assertEquals(9, app.items[0].sellIn);
+        assertEquals(ITEM_DEFAULT_SELLIN - 1, app.items[0].sellIn);
     }
 
     @Test
     public void updateQuality_doesDecreaseQuality() throws Exception {
-        item.quality = 10;
         app.updateQuality();
-        assertEquals(9, app.items[0].quality);
+        assertEquals(ITEM_DEFAULT_QUALITY - 1, app.items[0].quality);
     }
 
     @Test
     public void updateQuality_withPassedSellIn_doesDecreaseQuality() throws Exception {
-        item.quality = 10;
-        item.sellIn = 0;
+        item.sellIn = ITEM_OVERDUE_SELLIN;
         app.updateQuality();
-        assertEquals(8, app.items[0].quality);
+        assertEquals(ITEM_DEFAULT_QUALITY - 2, app.items[0].quality);
     }
 
     @Test
@@ -55,34 +56,31 @@ public class GildedRoseTest {
 
     @Test
     public void updateQuality_withNegativeQuality_doesNotDecreaseQuality() throws Exception {
-        item.quality = -10;
+        item.quality = -1;
         app.updateQuality();
-        assertEquals(-10, app.items[0].quality);
+        assertEquals(-1, app.items[0].quality);
     }
 
     @Test
-    public void updateQualityForAgedBrie_doesIncreaseQuality() throws Exception {
+    public void updateQuality_withAgedBrie_doesIncreaseQuality() throws Exception {
         item.name = "Aged Brie";
-        item.quality = 10;
         app.updateQuality();
-        assertEquals(11, app.items[0].quality);
+        assertEquals(ITEM_DEFAULT_QUALITY + 1, app.items[0].quality);
     }
 
     @Test
-    public void updateQualityForAgedBrieAfterSellIn_doesIncreaseQualityTwice() throws Exception {
+    public void updateQuality_withAgedBrieAfterSellIn_doesIncreaseQualityTwice() throws Exception {
         item.name = "Aged Brie";
-        item.sellIn = 0;
-        item.quality = 10;
+        item.sellIn = ITEM_OVERDUE_SELLIN;
         app.updateQuality();
-        assertEquals(12, app.items[0].quality);
+        assertEquals(ITEM_DEFAULT_QUALITY + 2, app.items[0].quality);
     }
 
     @Test
-    public void updateQualityForAgedBrieLongAfterSellIn_doesIncreaseQualityTwice() throws Exception {
+    public void updateQuality_withLongOverdueAgedBrie_doesIncreaseQualityTwice() throws Exception {
         item.name = "Aged Brie";
-        item.sellIn = -50;
-        item.quality = 10;
+        item.sellIn = ITEM_LONG_OVERDUE_SELLIN;
         app.updateQuality();
-        assertEquals(12, app.items[0].quality);
+        assertEquals(ITEM_DEFAULT_QUALITY + 2, app.items[0].quality);
     }
 }
