@@ -63,4 +63,20 @@ public class GildedRoseTest {
         app.updateQuality();
         assertEquals(-10, app.items[0].quality);
     }
+
+    @Test
+    public void updateQualityForAgedBrie_doesIncreaseQuality() throws Exception {
+        Item[] items = new Item[] { new Item("Aged Brie", 10, 10) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(11, app.items[0].quality);
+    }
+
+    @Test
+    public void updateQualityForAgedBrieAfterSellIn_doesIncreaseQualityTwice() throws Exception {
+        Item[] items = new Item[] { new Item("Aged Brie", 0, 10) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(12, app.items[0].quality);
+    }
 }
