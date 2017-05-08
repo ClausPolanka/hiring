@@ -1,0 +1,28 @@
+Gasthaus
+
+Kaufen und Verkaufen von Waren
+Qualität der Ware vermindert sich bis zum Ablaufdatum
+System aktualisiert Inventar
+
+Ware
+- sellIn // Verkaufstage
+- quality // Zahl repräsentiert Qualität der Ware
+
+Systemeigenschaften
+- Verringert Warenwerte am jeden Tages
+- sell by date // Ablaufdatum 
+- Wenn Ablaufdatum überschritten, dann verringert sich die Qualität doppelt so schnell
+- Qualität ist niemals negativ
+- Qualtiät ist niemals > 50
+
+Sonderfälle
+- "Aged Bri" Qualität wird erhöht bis zum Ablaufdatum
+- "Sulfuras" Never has to be sold?? Qualität bleibt unverändert
+- "Backstage" Qualität wird erhöht bis zum Ablaufdatum 
+- Wenn Verkaufstage <= 10 dann erhöht sich Qualität doppelt so schnell
+- Wenn Verkaufstage <=  5 dann erhöht sich die Qualität um 3
+- Qualität wird 0 wenn Ablaufdatum überschritten
+
+TODO
+Verkauf einer neuen Kategorie von Ware
+
