@@ -12,7 +12,7 @@ public class GildedRoseTest {
 
     @Before
     public void setUp() throws Exception {
-        item = new Item("foo", 0, 0);
+        item = new Item("foo", 10, 10);
         final Item[] items = new Item[] {item};
         app = new GildedRose(items);
     }
@@ -26,56 +26,53 @@ public class GildedRoseTest {
 
     @Test
     public void updateQuality_doesDecreaseSellIn() throws Exception {
-        Item[] items = new Item[] { new Item("foo", 10, 0) };
-        GildedRose app = new GildedRose(items);
+        item.sellIn = 10;
         app.updateQuality();
         assertEquals(9, app.items[0].sellIn);
     }
 
     @Test
     public void updateQuality_doesDecreaseQuality() throws Exception {
-        Item[] items = new Item[] { new Item("foo", 10, 10) };
-        GildedRose app = new GildedRose(items);
+        item.quality = 10;
         app.updateQuality();
         assertEquals(9, app.items[0].quality);
     }
 
     @Test
     public void updateQuality_withPassedSellIn_doesDecreaseQuality() throws Exception {
-        Item[] items = new Item[] { new Item("foo", 0, 10) };
-        GildedRose app = new GildedRose(items);
+        item.quality = 10;
+        item.sellIn = 0;
         app.updateQuality();
         assertEquals(8, app.items[0].quality);
     }
 
     @Test
     public void updateQuality_doesNotDecreaseQualityBelowZero() throws Exception {
-        Item[] items = new Item[] { new Item("foo", 0, 0) };
-        GildedRose app = new GildedRose(items);
+        item.quality = 0;
         app.updateQuality();
         assertEquals(0, app.items[0].quality);
     }
 
     @Test
     public void updateQuality_withNegativeQuality_doesNotDecreaseQuality() throws Exception {
-        Item[] items = new Item[] { new Item("foo", 0, -10) };
-        GildedRose app = new GildedRose(items);
+        item.quality = -10;
         app.updateQuality();
         assertEquals(-10, app.items[0].quality);
     }
 
     @Test
     public void updateQualityForAgedBrie_doesIncreaseQuality() throws Exception {
-        Item[] items = new Item[] { new Item("Aged Brie", 10, 10) };
-        GildedRose app = new GildedRose(items);
+        item.name = "Aged Brie";
+        item.quality = 10;
         app.updateQuality();
         assertEquals(11, app.items[0].quality);
     }
 
     @Test
     public void updateQualityForAgedBrieAfterSellIn_doesIncreaseQualityTwice() throws Exception {
-        Item[] items = new Item[] { new Item("Aged Brie", 0, 10) };
-        GildedRose app = new GildedRose(items);
+        item.name = "Aged Brie";
+        item.sellIn = 0;
+        item.quality = 10;
         app.updateQuality();
         assertEquals(12, app.items[0].quality);
     }
