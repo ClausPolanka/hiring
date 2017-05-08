@@ -8,7 +8,7 @@ import org.junit.Test;
 public class GildedRoseTest {
 
     private static final String ITEM_DEFAULT_NAME = "foo";
-    private static final int ITEM_DEFAULT_SELLIN = 10;
+    private static final int ITEM_DEFAULT_SELLIN = 15;
     private static final int ITEM_DEFAULT_QUALITY = 15;
     private static final int ITEM_OVERDUE_SELLIN = 0;
     private static final int ITEM_LONG_OVERDUE_SELLIN = -50;
@@ -105,5 +105,53 @@ public class GildedRoseTest {
         item.name = "Sulfuras, Hand of Ragnaros";
         app.updateQuality();
         assertEquals(ITEM_DEFAULT_SELLIN, app.items[0].sellIn);
+    }
+
+    @Test
+    public void withBackstagePassToBeSoldInElevenDays_increasesQualityByOne() {
+        item.name = "Backstage passes to a TAFKAL80ETC concert";
+        item.sellIn = 11;
+        app.updateQuality();
+        assertEquals(ITEM_DEFAULT_QUALITY + 1, app.items[0].quality);
+    }
+
+    @Test
+    public void withBackstagePassToBeSoldInTenDays_increasesQualityByTwo() {
+        item.name = "Backstage passes to a TAFKAL80ETC concert";
+        item.sellIn = 10;
+        app.updateQuality();
+        assertEquals(ITEM_DEFAULT_QUALITY + 2, app.items[0].quality);
+    }
+
+    @Test
+    public void withBackstagePassToBeSoldInSixDays_increasesQualityByTwo() {
+        item.name = "Backstage passes to a TAFKAL80ETC concert";
+        item.sellIn = 6;
+        app.updateQuality();
+        assertEquals(ITEM_DEFAULT_QUALITY + 2, app.items[0].quality);
+    }
+
+    @Test
+    public void withBackstagePassToBeSoldInFiveDays_increasesQualityByThree() {
+        item.name = "Backstage passes to a TAFKAL80ETC concert";
+        item.sellIn = 5;
+        app.updateQuality();
+        assertEquals(ITEM_DEFAULT_QUALITY + 3, app.items[0].quality);
+    }
+
+    @Test
+    public void withBackstagePassToBeSoldInOneDays_increasesQualityByThree() {
+        item.name = "Backstage passes to a TAFKAL80ETC concert";
+        item.sellIn = 1;
+        app.updateQuality();
+        assertEquals(ITEM_DEFAULT_QUALITY + 3, app.items[0].quality);
+    }
+
+    @Test
+    public void withBackstagePassToBeSoldInZeroDays_setsQualityToZero() {
+        item.name = "Backstage passes to a TAFKAL80ETC concert";
+        item.sellIn = 0;
+        app.updateQuality();
+        assertEquals(0, app.items[0].quality);
     }
 }
