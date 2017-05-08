@@ -92,4 +92,18 @@ public class GildedRoseTest {
         app.updateQuality();
         assertEquals(ITEM_QUALITY_MAX, app.items[0].quality);
     }
+
+    @Test
+    public void withSulfuras_doesNotChangeQuality() {
+        item.name = "Sulfuras, Hand of Ragnaros";
+        app.updateQuality();
+        assertEquals(ITEM_DEFAULT_QUALITY, app.items[0].quality);
+    }
+
+    @Test
+    public void withSulfuras_doesNotChangeSellIn() {
+        item.name = "Sulfuras, Hand of Ragnaros";
+        app.updateQuality();
+        assertEquals(ITEM_DEFAULT_SELLIN, app.items[0].sellIn);
+    }
 }
